@@ -20,13 +20,14 @@ listint_t *insert_node(listint_t **head, int number)
 		return (NULL);
 
 	new_node->n = number;
-	new_node->next = NULL;
 
+	// Insertion at the beginning of the list or into an empty list
 	if (*head == NULL || (*head)->n >= number)
 	{
 		new_node->next = *head;
 		*head = new_node;
 	} else {
+		// Traversing the list to find the insertion point
 		current = *head;
 
 		while (current->next != NULL && current->next->n < number)
