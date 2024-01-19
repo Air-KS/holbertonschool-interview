@@ -36,7 +36,7 @@ Return True if all boxes can be opened, else return False
 <br>
 
 ```bash
-cd 0x00-lockboxes
+cd lockboxes
 ./main_0.py
 ```
 </details>
