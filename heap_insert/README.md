@@ -28,6 +28,7 @@ Your function must return a pointer to the new node, or NULL on failure
 
 ### Try It On Your Machine :computer:
 
+<details>
 <summary>0-main.c</summary>
 <br>
 
@@ -76,6 +77,7 @@ int main(void)
 ```
 </details>
 
+<details>
 <summary>1-main.c</summary>
 <br>
 
@@ -141,6 +143,9 @@ int main(void)
 ```
 </details>
 
+<br>
+
+<details>
 <summary>Test File</summary>
 <br>
 
