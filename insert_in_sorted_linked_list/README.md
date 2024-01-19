@@ -1,127 +1,32 @@
-# Insert in sorted linked list
+# Insert in sorted linked list :neckbeard:
 
-## Context
+> Technical interview challenges
 
-Write a function in `C` that inserts a number into a sorted linked list.
+## Tasks :heavy_check_mark:
 
-- Prototype: `listint_t *insert_node(listint_t **head, int number);`
-- Return: the address of the new node, or `NULL` if it failed.
+Write a function in C that inserts a number into a sorted singly linked list.
 
-## Files
+- Prototype: ```listint_t *insert_node(listint_t **head, int number);```
+- Return: the address of the new node, or NULL if it failed
 
-- `lists.h`
+## Results :chart_with_upwards_trend:
 
-```
-#ifndef LISTS_H
-#define LISTS_H
+| Filename |
+| ------ |
+| [0-insert_number.c](https://github.com/Air-KS/holbertonschool-interview/blob/main/insert_in_sorted_linked_list/0-insert_number.c)|
 
-#include <stddef.h>
+## Additional info :construction:
+### Resources
 
-/**
- * struct listint_s - singly linked list
- * @n: integer
- * @next: points to the next node
- *
- * Description: singly linked list node structure
- * for Holberton project
- */
-typedef struct listint_s
-{
-    int n;
-    struct listint_s *next;
-} listint_t;
+- C
 
-size_t print_listint(const listint_t *h);
-listint_t *add_nodeint_end(listint_t **head, const int n);
-void free_listint(listint_t *head);
+### Try It On Your Machine :computer:
 
-listint_t *insert_node(listint_t **head, int number);
+<details>
+<summary>0-main.c</summary>
+<br>
 
-#endif /* LISTS_H */
-```
-
-- linked_lists.c
-
-```
-#include <stdio.h>
-#include <stdlib.h>
-#include "lists.h"
-
-/**
- * print_listint - prints all elements of a listint_t list
- * @h: pointer to head of list
- * Return: number of nodes
- */
-size_t print_listint(const listint_t *h)
-{
-    const listint_t *current;
-    unsigned int n; /* number of nodes */
-
-    current = h;
-    n = 0;
-    while (current != NULL)
-    {
-        printf("%i\n", current->n);
-        current = current->next;
-        n++;
-    }
-
-    return (n);
-}
-
-/**
- * add_nodeint_end - adds a new node at the end of a listint_t list
- * @head: pointer to pointer of first node of listint_t list
- * @n: integer to be included in new node
- * Return: address of the new element or NULL if it fails
- */
-listint_t *add_nodeint_end(listint_t **head, const int n)
-{
-    listint_t *new;
-    listint_t *current;
-
-    current = *head;
-
-    new = malloc(sizeof(listint_t));
-    if (new == NULL)
-        return (NULL);
-
-    new->n = n;
-    new->next = NULL;
-
-    if (*head == NULL)
-        *head = new;
-    else
-    {
-        while (current->next != NULL)
-            current = current->next;
-        current->next = new;
-    }
-
-    return (new);
-}
-
-/**
- * free_listint - frees a listint_t list
- * @head: pointer to list to be freed
- * Return: void
- */
-void free_listint(listint_t *head)
-{
-    listint_t *current;
-
-    while (head != NULL)
-    {
-        current = head;
-        head = head->next;
-        free(current);
-    }
-}
-```
-
-- 0-main.c
-
-```
+```c
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -157,9 +62,24 @@ int main(void)
 
     return (0);
 }
+
 ```
+</details>
 
-## Test
+<details>
 
-- Use the command:
-  `gcc -Wall -Werror -Wextra -pedantic 0-main.c linked_lists.c 0-insert_number.c -o insert`
+<summary>Test File</summary>
+<br>
+
+```bash
+cd insert_in_sorted_linked_list
+gcc -Wall -Werror -Wextra -pedantic 0-main.c linked_lists.c 0-insert_number.c -o insert
+./insert
+```
+</details>
+
+------------------------------
+
+# Author
+ROGERET Kevin<br>
+> Project carried out within the framework of the school **[Holberton School](https://www.holbertonschool.com/).**<br>
