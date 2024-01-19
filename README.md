@@ -24,3 +24,9 @@ This repository used the following main stack:
 | [Vagrant](https://www.vagrantup.com/)|
 | [Pycharm Pro](https://www.jetbrains.com/pycharm/)|
 | [jupyter](https://jupyter.org/)|
+
+------------------------------
+
+# Author
+ROGERET Kevin<br>
+> Project carried out within the framework of the school **[Holberton School](https://www.holbertonschool.com/).**<br>
