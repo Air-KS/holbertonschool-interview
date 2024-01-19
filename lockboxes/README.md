@@ -36,7 +36,6 @@ Return True if all boxes can be opened, else return False
 <br>
 
 ```bash
-git clone https://github.com/edward0rtiz/holbertonschool-interview
 cd 0x00-lockboxes
 ./main_0.py
 ```
