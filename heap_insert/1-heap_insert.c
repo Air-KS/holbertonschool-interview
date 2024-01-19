@@ -10,7 +10,6 @@ size_t binary_tree_size(const binary_tree_t *tree)
 {
 	size_t size = 0, left = 0, right = 0;
 
-	// Checks if the tree is empty.
 	if (tree == NULL)
 	{
 		return (0);
@@ -37,13 +36,11 @@ heap_t *insert_ordered(binary_tree_t *tree, int value, int idx, int n_leaf)
 {
 	heap_t *node;
 
-	// Checks if the tree is empty.
 	if (tree == NULL)
 	{
 		return (NULL);
 	}
 
-	// Position for the new node and insert it as a left or right child.
 	if (idx + 1 == n_leaf / 2)
 	{
 		if (n_leaf & 1)
@@ -58,10 +55,8 @@ heap_t *insert_ordered(binary_tree_t *tree, int value, int idx, int n_leaf)
 		}
 	}
 
-	// Attempt to insert in the left subtree.
 	node = insert_ordered(tree->left, value, 2 * idx + 1, n_leaf);
 
-	// If insertion in the left subtree didn't happen, try the right subtree.
 	if (node != 0)
 	{
 		return (node);
@@ -82,17 +77,14 @@ heap_t *heap_insert(heap_t **root, int value)
 {
 	heap_t *node;
 
-	// If the heap is empty, create a new root node.
 	if (*root == NULL)
 	{
 		*root = binary_tree_node(NULL, value);
 		return (*root);
 	}
 
-	// Insert the new node in an ordered manner.
 	node = insert_ordered(*root, value, 0, binary_tree_size(*root) + 1);
 
-	// Rearrange the heap if necessary to maintain the max-heap property.
 	while (node->parent && node->n > node->parent->n)
 	{
 		node->n = node->parent->n;
