@@ -5,18 +5,7 @@ Module which contains minoperations function
 
 
 def minOperations(n):
-    """
-    Calculates the fewest number of operations required to
-    obtain exactly n 'H' characters in the file.
 
-    Args:
-    n (int): The target number of 'H' characters.
-
-    Returns:
-    int: The minimum number of operations needed.
-    """
-
-    # Comment
     if n <= 1:
         return 0
 
