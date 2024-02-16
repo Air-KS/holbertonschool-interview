@@ -12,7 +12,7 @@ stats = {
     '400': 0,
 }
 sizes = [0]
-
+count = 0
 
 def print_stats_code():
     """ Displays the statistics of status codes and the total file size """
