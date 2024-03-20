@@ -1,9 +1,12 @@
 #include "slide_line.h"
 
 /**
- *
- *
- *
+ * slide_line - reproduce the 2048 game(NSFW !!) mechanics on a single
+ * horizontal line.
+ * @line: Pointer to the line array
+ * @size: Size of array
+ * @direction: Direction eft or right
+ * Return: 1 upon success, or 0 upon failure
  */
 
 int slide_line(int *line, size_t size, int direction)
