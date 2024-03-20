@@ -1,110 +1,79 @@
+#include <stddef.h>
 #include "slide_line.h"
 
-/**
-* slide_left - Slides array to left
-*
-* @line: Points to an array of integers containing size elements
-*
-* @size: Size of the array
-*
-* Return: Void
-*/
-
-void slide_left(int *line, size_t size)
-{
-	size_t index, position = 0, temp;
-
-	for (index = 0; index < size && position; index++)
-	{
-		while (line[position] == 0 && (position < size) && (position + 1 < size))
-		{
-			position++;
-		}
-		if (!line[index])
-		{
-			temp = line[position];
-			line[position] = line[index];
-			line[index] = temp;
-		}
-		position++;
-	}
-}
+#define SLIDE_LEFT  0
+#define SLIDE_RIGHT 1
 
 /**
-* slide_right - Slides array to right
-*
-* @line: Points to an array of integers containing size elements
-*
-* @size: Size of the array
-*
-* Return: Void
-*/
-
-void slide_right(int *line, size_t size)
-{
-	size_t index, temp, position;
-
-	position = size - 1;
-
-	for (index = size - 1; (int)index >= 0 && (int)position >= 0; index--)
-	{
-		while (line[position] == 0 && position > 0)
-		{
-			position--;
-		}
-		if (!line[index])
-		{
-			temp = line[position];
-			line[position] = line[index];
-			line[index] = temp;
-		}
-		position--;
-	}
-}
-
-/**
-* slide_line - Reproduces 2048 on one line
-*
-* @line: Points to an array of integers containing size elements
-*
-* @size: Size of the array
-*
-* @direction: Direction to slide
-*
-* Return: 1 on success, 0 on failure
-*/
-
+ * slide_line - Slide and merge an array of integers
+ * @line: Pointer to the array of integers
+ * @size: Number of elements in the array
+ * @direction: SLIDE_LEFT or SLIDE_RIGHT
+ *
+ * Return: 1 upon success, 0 upon failure
+ */
 int slide_line(int *line, size_t size, int direction)
 {
-	size_t index;
+	size_t current, next;
 
-	if (direction == SLIDE_LEFT)
-	{
-		slide_left(line, size);
-		for (index = 0; index < size; index++)
-		{
-			if (line[index] == line[index + 1])
-			{
-				line[index] = line[index] + line[index + 1];
-				line[index + 1] = 0;
-			}
-		}
-		slide_left(line, size);
-		return (1);
-	} else if (direction == SLIDE_RIGHT)
-	{
-		slide_right(line, size);
-
-		for (index = size - 1; (int)index >= 0; index--)
-		{
-			if (line[index] == line[index - 1])
-			{
-				line[index] = line[index] + line[index - 1];
-				line[index - 1] = 0;
-			}
-		}
-		slide_right(line, size);
-		return (1);
+	if (direction != SLIDE_LEFT && direction != SLIDE_RIGHT) {
+		return 0; /* Failure if direction is invalid */
 	}
-	return (0);
+
+	if (direction == SLIDE_LEFT) {
+		/* Slide and merge to the left */
+		for (current = 0; current < size; current++) {
+			if (line[current] == 0)
+				continue;
+			for (next = current + 1; next < size; next++) {
+				if (line[next] == 0)
+					continue;
+				if (line[current] == line[next]) {
+					line[current] *= 2;
+					line[next] = 0;
+					break;
+				} else {
+					break;
+				}
+			}
+		}
+		/* Slide all elements to the left */
+		for (current = 0, next = 0; current < size; current++) {
+			if (line[current] != 0) {
+				line[next++] = line[current];
+			}
+		}
+		/* Fill the rest with zeros */
+		for (; next < size; next++) {
+			line[next] = 0;
+		}
+	} else { /* direction == SLIDE_RIGHT */
+		/* Slide and merge to the right */
+		for (current = size - 1; current < size; current--) {
+			if (line[current] == 0)
+				continue;
+			for (next = current - 1; next < size; next--) {
+				if (line[next] == 0)
+					continue;
+				if (line[current] == line[next]) {
+					line[current] *= 2;
+					line[next] = 0;
+					break;
+				} else {
+					break;
+				}
+			}
+		}
+		/* Slide all elements to the right */
+		for (current = size - 1, next = size - 1; current < size; current--) {
+			if (line[current] != 0) {
+				line[next--] = line[current];
+			}
+		}
+		/* Fill the rest with zeros */
+		for (; next < size; next--) {
+			line[next] = 0;
+		}
+	}
+	return 1; /* Success */
 }
