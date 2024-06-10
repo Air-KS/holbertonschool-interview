@@ -3,6 +3,7 @@
 Module used to rotate a matrix 90 degres
 """
 
+
 def rotate_2d_matrix(matrix):
     """
     Given an n x n 2D matrix, rotate it 90 degrees.
@@ -27,5 +28,5 @@ def rotate_2d_matrix(matrix):
         # extract the i column from the copy
         col = [row[index] for row in copy]
 
-         # place it on the original matrix in reverse order
+        # place it on the original matrix in reverse order
         matrix[index] = col[::-1]
