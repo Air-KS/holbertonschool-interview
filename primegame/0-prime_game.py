@@ -1,63 +1,34 @@
 #!/usr/bin/python3
-""" Prime Game """
-
-
-def isprime(n):
-    """ n: number to check if it is prime"""
-    for i in range(2, n):
-        if n % i == 0:
-            return False
-    return True
-
-
-def delete_numbers(n, nums):
-    """ delete numbers - assign zero """
-    for i in range(len(nums)):
-        if nums[i] % n == 0:
-            nums[i] = 0
+""" Module for Prime Game """
 
 
 def isWinner(x, nums):
-    """ where x is the number of rounds and nums is an array of n
-        Return: name of the player that won the most rounds
-        Iriaf the winner cannot be determined, return None
-        You can assume n and x will not be larger than 10000
-    """
-    nums.sort()
-    winner = False
-    Maria = 0
-    Ben = 0
-    for game in range(x):
-        # print("game# ", game+1)
-        nums2 = list(range(1, nums[game] + 1))
-        # print("nums: ", nums2)
-        turn = 0
-        while True:
-            """
-            # uncomment to monitor turns
-            if turn % 2 != 0:
-                print("Ben turn ")
-            else:
-                print("Maria turn ")
-            """
-            change = False
-            for i, n in enumerate(nums2):
-                # print("n: ", n, "i: ", i)
-                if n > 1 and isprime(n):
-                    delete_numbers(n, nums2)
-                    change = True
-                    turn += 1
-                    break
-            # print("movement: ", nums2)
-            if change is False:
-                break
-        if turn % 2 != 0:
-            Maria += 1
-        else:
-            Ben += 1
-        # print("Maria: {}, Ben: {}".format(Maria, Ben))
-    if Maria == Ben:
+    """Solves Prime Game"""
+    if not nums or x < 1:
         return None
-    if Maria > Ben:
-        return "Maria"
-    return "Ben"
+    n = max(nums)
+    sieve = [True for _ in range(max(n + 1, 2))]
+    for i in range(2, int(pow(n, 0.5)) + 1):
+        if not sieve[i]:
+            continue
+        for j in range(i*i, n + 1, i):
+            sieve[j] = False
+
+    sieve[0] = sieve[1] = False
+    c = 0
+    for i in range(len(sieve)):
+        if sieve[i]:
+            c += 1
+        sieve[i] = c
+
+    winner = ''
+    player1 = 0
+    for n in nums:
+        player1 += sieve[n] % 2 == 1
+    if player1 * 2 == len(nums):
+        winner = None
+    if player1 * 2 > len(nums):
+        winner = "Maria"
+    else:
+        winner = "Ben"
+    return winner
